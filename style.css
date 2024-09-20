@@ -9,6 +9,9 @@ header {
     color: #fff;
     text-align: center;
     padding: 1em 0;
+    position: fixed;
+    left: 0;
+    top: 0;
 }
 header h1 {
     margin: 0;
@@ -55,5 +58,4 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #f1f1f1;
 }
