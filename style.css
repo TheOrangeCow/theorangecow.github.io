@@ -51,5 +51,9 @@ footer {
     padding: 20px 0;
     background-color: #333;
     color: #fff;
-    bottom: 0px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f1f1f1;
 }
