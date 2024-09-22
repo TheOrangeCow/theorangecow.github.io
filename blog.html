@@ -52,7 +52,7 @@
 
     <script>
         function fetchPosts() {
-            fetch('blog.php')
+            fetch('https://house-778.org/blog/blog.php')
                 .then(response => response.json())
                 .then(posts => {
                     const blogContainer = document.getElementById('blog-container');
@@ -78,7 +78,7 @@
             const author = document.getElementById('author').value;
             const content = document.getElementById('content').value;
 
-            fetch('blog.php', {
+            fetch('bhttps://house-778.org/blog/blog.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
