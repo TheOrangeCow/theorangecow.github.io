@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog</title>
+    <style>
+        .post {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .author {
+            font-size: 16px;
+            color: #555;
+        }
+        .content {
+            font-size: 18px;
+        }
+        .date {
+            font-size: 14px;
+            color: #999;
+        }
+        .form-container {
+            margin-top: 30px;
+        }
+        input, textarea {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog Posts</h1>
+    <div id="blog-container"></div>
+
+    <div class="form-container">
+        <h2>Add a New Post</h2>
+        <form id="postForm">
+            <input type="text" id="title" placeholder="Title" required>
+            <input type="text" id="author" placeholder="Author" required>
+            <textarea id="content" placeholder="Content" rows="5" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function fetchPosts() {
+            fetch('blog.php')
+                .then(response => response.json())
+                .then(posts => {
+                    const blogContainer = document.getElementById('blog-container');
+                    blogContainer.innerHTML = ''; // Clear previous posts
+                    posts.forEach(post => {
+                        const postDiv = document.createElement('div');
+                        postDiv.className = 'post';
+                        postDiv.innerHTML = `
+                            <div class="title">${post.title}</div>
+                            <div class="author">By ${post.author}</div>
+                            <div class="content">${post.content}</div>
+                            <div class="date">${post.date}</div>
+                        `;
+                        blogContainer.appendChild(postDiv);
+                    });
+                });
+        }
+
+        document.getElementById('postForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const content = document.getElementById('content').value;
+
+            fetch('blog.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title, author, content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    fetchPosts(); // Refresh the blog posts
+                    document.getElementById('postForm').reset(); // Clear the form
+                } else {
+                    alert('Failed to submit the post');
+                }
+            });
+        });
+
+        // Fetch and display posts on page load
+        fetchPosts();
+    </script>
+</body>
+</html>
