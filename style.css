@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 120px 0 120px; 
     background-color: #f4f4f4;
+    justify-content: center;
 }
 
 header {
@@ -103,15 +104,11 @@ footer {
     margin-top: 30px;
     text-align: center;
 }
-input, textarea {
-    display: block;
-    margin-bottom: 10px;
-    width: 60%;
-    padding: 8px;
-}
+
 input[type="text"],
 input[type="password"],
-input[type="submit"] {
+input[type="submit"],
+textarea {
     width: 90%;
     padding: 10px;
     margin-bottom: 10px;
