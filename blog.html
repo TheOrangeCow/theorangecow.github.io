@@ -21,7 +21,7 @@
         .content {
             font-size: 18px;
         }
-        .date {
+        .date, .timestamp {
             font-size: 14px;
             color: #999;
         }
@@ -52,11 +52,11 @@
 
     <script>
         function fetchPosts() {
-            fetch('https://house-778.org/blog/blog.php')
+            fetch('blog.php')
                 .then(response => response.json())
                 .then(posts => {
                     const blogContainer = document.getElementById('blog-container');
-                    blogContainer.innerHTML = ''; 
+                    blogContainer.innerHTML = ''; // Clear previous posts
                     posts.forEach(post => {
                         const postDiv = document.createElement('div');
                         postDiv.className = 'post';
@@ -64,7 +64,8 @@
                             <div class="title">${post.title}</div>
                             <div class="author">By ${post.author}</div>
                             <div class="content">${post.content}</div>
-                            <div class="date">${post.date}</div>
+                            <div class="date">Date: ${post.date}</div>
+                            <div class="timestamp">Posted at: ${post.timestamp}</div>
                         `;
                         blogContainer.appendChild(postDiv);
                     });
@@ -78,7 +79,7 @@
             const author = document.getElementById('author').value;
             const content = document.getElementById('content').value;
 
-            fetch('https://house-778.org/blog/blog.php', {
+            fetch('blog.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -88,13 +89,15 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    fetchPosts();
-                    document.getElementById('postForm').reset();
+                    fetchPosts(); // Refresh the blog posts
+                    document.getElementById('postForm').reset(); // Clear the form
                 } else {
                     alert('Failed to submit the post');
                 }
             });
         });
+
+        // Fetch and display posts on page load
         fetchPosts();
     </script>
 </body>
