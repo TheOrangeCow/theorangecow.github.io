@@ -56,7 +56,7 @@
                 .then(response => response.json())
                 .then(posts => {
                     const blogContainer = document.getElementById('blog-container');
-                    blogContainer.innerHTML = ''; // Clear previous posts
+                    blogContainer.innerHTML = ''; 
                     posts.forEach(post => {
                         const postDiv = document.createElement('div');
                         postDiv.className = 'post';
@@ -78,7 +78,7 @@
             const author = document.getElementById('author').value;
             const content = document.getElementById('content').value;
 
-            fetch('bhttps://house-778.org/blog/blog.php', {
+            fetch('https://house-778.org/blog/blog.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -88,15 +88,13 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    fetchPosts(); // Refresh the blog posts
-                    document.getElementById('postForm').reset(); // Clear the form
+                    fetchPosts();
+                    document.getElementById('postForm').reset();
                 } else {
                     alert('Failed to submit the post');
                 }
             });
         });
-
-        // Fetch and display posts on page load
         fetchPosts();
     </script>
 </body>
