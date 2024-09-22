@@ -4,42 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Blog</title>
-    <style>
-        .post {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-        }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .author {
-            font-size: 16px;
-            color: #555;
-        }
-        .content {
-            font-size: 18px;
-        }
-        .date, .timestamp {
-            font-size: 14px;
-            color: #999;
-        }
-        .form-container {
-            margin-top: 30px;
-        }
-        input, textarea {
-            display: block;
-            margin-bottom: 10px;
-            width: 100%;
-            padding: 8px;
-        }
-    </style>
+    <link rel="icon" href="images.ico" type="image/x-icon">
+    <title>The Orange Cow</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>The Orange Cow</h1>
+        <p>Welcome to my GitHub</p>
+    </header>
+    
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="teamname132.html">Teamname132</a>
+        <a href="blog.html">Blog</a>
+    </nav>
     <h1>Blog Posts</h1>
     <div id="blog-container"></div>
 
+
+    
     <div class="form-container">
         <h2>Add a New Post</h2>
         <form id="postForm">
@@ -50,6 +35,10 @@
         </form>
     </div>
 
+    <footer>
+        <p>&copy; 2024 The Orange Cow. All rights reserved.</p>
+    </footer>
+    
     <script>
         function fetchPosts() {
             fetch('https://house-778.org/blog/blog.php')
