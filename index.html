@@ -20,16 +20,59 @@
     <a href="teamname132.html">Teamname132</a>
     <a href="blog.html">Blog</a>
 </nav>
-<div style="text-align: center; margin: 20px;">
-    <iframe src="https://github-readme-stats.vercel.app/api/top-langs/?username=theorangecow&theme=light" 
-            frameborder="0" width="400" height="300" style="margin: 10px;"></iframe>
-    <iframe src="https://github-readme-stats.vercel.app/api?username=theorangecow&theme=light" 
-            frameborder="0" width="400" height="300" style="margin: 10px;"></iframe>
-</div>
+    <h1>Wordle Answers</h1>
+    <div>
+        <p>Yesterday's answer: <span id="yesterday-answer">Loading...</span></p>
+        <p>Today's answer: <span id="today-answer">Loading...</span></p>
+        <p>Tomorrow's answer: <span id="tomorrow-answer">Loading...</span></p>
+    </div>
+
+    <div style="text-align: center; margin: 20px;">
+        <iframe src="https://github-readme-stats.vercel.app/api/top-langs/?username=theorangecow&theme=light" 
+                frameborder="0" width="400" height="300" style="margin: 10px;"></iframe>
+        <iframe src="https://github-readme-stats.vercel.app/api?username=theorangecow&theme=light" 
+                frameborder="0" width="400" height="300" style="margin: 10px;"></iframe>
+    </div>
 
 <footer>
     <p>&copy; 2024 The Orange Cow. All rights reserved.</p>
 </footer>
 
 </body>
+<script>
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+    const todayDate = new Date();
+    const tomorrowDate = new Date();
+    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+
+    const formatDate = (date) => date.toISOString().split('T')[0];
+
+    const wordleAnswer = async (date) => {
+        const url = `https://www.nytimes.com/svc/wordle/v2/${date}.json`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error("Error fetching the Wordle answer");
+            }
+            const data = await response.json();
+            return data.solution || null;
+        } catch (error) {
+            console.error(error.message);
+            return null;
+        }
+    };
+
+    const getWordleAnswers = async () => {
+        const yesterdayAnswer = await wordleAnswer(formatDate(yesterdayDate)) || "Couldn't find answer";
+        const todayAnswer = await wordleAnswer(formatDate(todayDate)) || "Couldn't find answer";
+        const tomorrowAnswer = await wordleAnswer(formatDate(tomorrowDate)) || "Couldn't find answer";
+        
+        document.getElementById('yesterday-answer').textContent = yesterdayAnswer;
+        document.getElementById('today-answer').textContent = todayAnswer;
+        document.getElementById('tomorrow-answer').textContent = tomorrowAnswer;
+    };
+
+    getWordleAnswers();
+</script>
 </html>
