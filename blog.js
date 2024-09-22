@@ -47,16 +47,17 @@ document.getElementById('postForm').addEventListener('submit', function(event) {
 
 fetchPosts();
 
-document.addEventListener('DOMContentLoaded', (event) => {
 
-    fetch('https://house-778.org/get_ip.php')
-        .then(response => response.text())
-        .then(ip => {
-            if (ip.trim() != "31.125.109.84") {
-                document.getElementById("post-blog").remove();
-            }
-        })
-        .catch(error => {
-            console.error(error);
-        });
-});
+
+fetch('https://house-778.org/get_ip.php')
+    .then(response => response.text())
+    .then(ip => {
+        if (ip.trim() != "31.125.109.84") {
+            document.getElementById("post-blog").remove();
+        }
+    })
+    .catch(error => {
+        console.error(error);
+    }
+);
+
