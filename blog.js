@@ -52,7 +52,7 @@ fetchPosts();
 fetch('https://house-778.org/get_ip.php')
     .then(response => response.text())
     .then(ip => {
-        if (ip.trim() != "31.125.109.84") {
+        if (ip.trim() != "no") {
             document.getElementById("post-blog").remove();
         }
     })
